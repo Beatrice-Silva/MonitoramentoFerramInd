@@ -6,11 +6,16 @@ package com.monitoramento.main.controller;
 
 
 import com.monitoramento.main.model.FerramentaDTO;
+import com.monitoramento.main.service.FerramentaService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
@@ -18,18 +23,29 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Aluno
  */
-@RestController
-@RequestMapping("/api/editais")
+@Controller
 public class FerramentaController {
-  
     
-    @GetMapping
-    public String getPercentualDesgaste(
+    @Autowired 
+    private FerramentaService service;
+  
+    @GetMapping("/ferramentas")
+    public String listarFerramenta(
     @RequestBody FerramentaDTO ferramenta
+    
     ){
-        
+        return "index";
+    }
+    
+    @PostMapping("/ferramentas/salvar")
+    public String receberFerramenta(@ModelAttribute FerramentaDTO ferramenta,
+    RedirectAttributes redirectAttributes
+    ){
+        service.criarFerramenta(ferramenta);
         return "index";
         
+        //chamar metodo persistencia manual
+ 
     }
        
         

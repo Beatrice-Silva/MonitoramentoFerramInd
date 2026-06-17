@@ -48,6 +48,7 @@ public class FerramentaController {
         return "ferramentas";
     }
     
+    //criar
     @PostMapping("/ferramentas/salvar")
     public String receberFerramenta(@ModelAttribute FerramentaDTO ferramenta,
     RedirectAttributes redirectAttributes
@@ -55,6 +56,22 @@ public class FerramentaController {
         service.criarFerramenta(ferramenta);
         return "ferramentas";
         //chamar metodo persistencia manual
+    }
+    
+    @PostMapping("/ferramentas/deletar:{id}")
+    public String deletarFerramenta(@ModelAttribute int id,
+    RedirectAttributes redirectAttributes
+    ){
+        service.deletarFerramenta(id);
+        return "ferramentas";
+    }
+    
+    //atualizar
+    @PostMapping("/ferramentas/salvar")
+    public String atualizarFerramenta(@ModelAttribute int id,
+    RedirectAttributes redirectAttributes
+    ){
+        return service.atualizarFerramenta(id);
     }
     
     

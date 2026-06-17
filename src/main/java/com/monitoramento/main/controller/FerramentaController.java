@@ -5,11 +5,13 @@
 package com.monitoramento.main.controller;
 
 
+
 import com.monitoramento.main.model.FerramentaDTO;
 import com.monitoramento.main.service.FerramentaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,12 +31,21 @@ public class FerramentaController {
     @Autowired 
     private FerramentaService service;
   
+    @GetMapping("/")
+    public String index(
+    ){
+         return "redirect:/ferramentas";
+    }
+    
     @GetMapping("/ferramentas")
     public String listarFerramenta(
-    @RequestBody FerramentaDTO ferramenta
-    
+    //@RequestBody FerramentaDTO ferramenta
+    Model model
     ){
-        return "index";
+        List<FerramentaDTO> lista = service.listarFerram();
+        model.addAttribute("ferramentas",lista);
+
+        return "ferramentas";
     }
     
     @PostMapping("/ferramentas/salvar")
@@ -42,13 +53,9 @@ public class FerramentaController {
     RedirectAttributes redirectAttributes
     ){
         service.criarFerramenta(ferramenta);
-        return "index";
-        
+        return "ferramentas";
         //chamar metodo persistencia manual
- 
     }
-       
-        
     
     
     

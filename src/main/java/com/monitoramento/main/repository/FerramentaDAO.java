@@ -22,6 +22,7 @@ public class FerramentaDAO {
     
     
     public int salvarFerram(FerramentaDTO ferramenta){
+        int linhas = 0;
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
@@ -33,11 +34,11 @@ public class FerramentaDAO {
                 stmt.setInt(3,ferramenta.getVidaUtilMaxima());
                 
             
-                stmt.executeUpdate();
+                linhas = stmt.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return 0;
+        return linhas;
         
     }
     
@@ -69,7 +70,8 @@ public class FerramentaDAO {
         return ferramentas;
     }
     
-    public void deletarFerram(int id){
+    public int deletarFerram(int id){
+        int linhas = 0;
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement("DELETE \n" +
@@ -77,39 +79,36 @@ public class FerramentaDAO {
             "WHERE id = ? ;");
             stmt.setInt(1, id);
             
-            stmt.executeUpdate();
-            stmt.close();
-            conn.close();
+            linhas =stmt.executeUpdate();
+          
         }catch(SQLException e){
             e.printStackTrace();
         }
+        return linhas;
     }
     
     
-    public void atualizarFerram(FerramentaDTO ferramenta){
-        
+    public int atualizarFerram(FerramentaDTO ferramenta){
+        int linhas = 0;
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conn.prepareStatement("UPDATE tb_ferramenta SET nome= ?, horas_uso = ?, vidautilmax = ?");
+            stmt = conn.prepareStatement("UPDATE tb_ferramenta SET nome= ?, horas_uso = ?, vidautilmax = ? where id = ?");
             
                 stmt.setString(1,ferramenta.getNome());
                 stmt.setInt(2,ferramenta.getHorasDeUso());
                 stmt.setInt(3,ferramenta.getVidaUtilMaxima());
                
-            stmt.executeUpdate();
-            stmt.close();
-            conn.close();
+                stmt.setInt(4,ferramenta.getId());
+            linhas = stmt.executeUpdate();            
             
         }catch(SQLException e){
             e.printStackTrace();
         }
-    
+        return linhas;
     }
-    
-    
     
     
 }

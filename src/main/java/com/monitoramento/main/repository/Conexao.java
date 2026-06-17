@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class Conexao {
     
-    private static final String url = "jdbc:mysql://localhost:3306/schema";
+    private static final String url = "jdbc:mysql://localhost:3307/schema";
     private static final String user = "root";
     private static final String senha = "";
     
@@ -27,7 +27,7 @@ public class Conexao {
     public static synchronized Connection conectar(){
         try{
             if(conn == null || conn.isClosed()){
-            conn = DriverManager.getConnection(url, senha, user);
+            conn = DriverManager.getConnection(url, user, senha);
             }
             }catch(SQLException e){
                 e.printStackTrace();

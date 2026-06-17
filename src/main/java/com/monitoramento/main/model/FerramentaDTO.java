@@ -45,9 +45,9 @@ public class FerramentaDTO {
         return horasDeUso;
     }
     
-    public double getPercentualDesgaste(){
+    public double getPercentualDesgaste( ){
         
-        double percenDesg = horasDeUso / vidaUtilMaxima * 100;
+        double percenDesg = (horasDeUso / vidaUtilMaxima) * 100;
         return percenDesg;
     }
 

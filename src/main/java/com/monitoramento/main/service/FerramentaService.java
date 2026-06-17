@@ -25,20 +25,20 @@ public class FerramentaService {
     public void criarFerramenta(FerramentaDTO f){
         if(f.getNome().equals("")){
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Campo 'nome' está vazio!");
-        }else if(f.getVidaUtilMaxima() <= 0){
-            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Campo 'vida' útil máxima' está vazio!");
-        }else if(f.getNome().equals("")){
-            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Campo 'vida' útil máxima' está vazio!");
+        }
+        if(f.getVidaUtilMaxima() <= 0){
+            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Campo 'vida útil máxima' útil máxima' está vazio!");
+        }
+        if(f.getHorasDeUso() < 0){
+            f.setHorasDeUso(0);
+            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Campo 'horas de uso' está vazio!");
         }
         
         int linhas = repository.salvarFerram(f);
         if(linhas == 0){
         throw new ResponseStatusException(HttpStatusCode.valueOf(500), "Erro ao adicionar ao Banco de dados!");    
         }
-        
         //repository.salvarFerram(f);
-        
-        
     }
     
     public List<FerramentaDTO> listarFerram(){
@@ -50,8 +50,7 @@ public class FerramentaService {
         repository.deletarFerram(id);
     }
     
-    public void atualizarFerramenta(FerramentaDTO ferramenta,
-            int id){
+    public void atualizarFerramenta(int id){
         repository.atualizarFerram(id);
         
     }

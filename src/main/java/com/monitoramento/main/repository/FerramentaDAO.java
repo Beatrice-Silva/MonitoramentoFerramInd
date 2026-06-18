@@ -26,12 +26,13 @@ public class FerramentaDAO {
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
-            stmt = conn.prepareStatement("INSERT INTO tb_ferramenta(nome,horas_uso,vidautilmax) "
-                    + "VALUES(?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO ferramenta(nome,horas_uso,vidautilmax,status) "
+                    + "VALUES(?,?,?,?)");
                
                 stmt.setString(1,ferramenta.getNome());
                 stmt.setInt(2,ferramenta.getHorasDeUso());
                 stmt.setInt(3,ferramenta.getVidaUtilMaxima());
+                stmt.setString(4, ferramenta.getStatus());
                 
             
                 linhas = stmt.executeUpdate();
@@ -50,16 +51,19 @@ public class FerramentaDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conn.prepareStatement("SELECT * FROM tb_ferramenta");
+            stmt = conn.prepareStatement("SELECT * FROM ferramenta");
             rs = stmt.executeQuery();
             
             while(rs.next()){
                 FerramentaDTO ferramenta = new FerramentaDTO();
                 
-                ferramenta.setId(rs.getInt("id"));
+                ferramenta.setId(rs.getLong("id"));
+                ferramenta.setId_galpao(rs.getLong("id_galpao"));
+                ferramenta.setId_usuario_responsavel(rs.getLong("id_usuario_responsavel"));
                 ferramenta.setNome(rs.getString("nome"));
                 ferramenta.setHorasDeUso(rs.getInt("horas_uso"));
                 ferramenta.setVidaUtilMaxima(rs.getInt("vidautilmax"));
+                ferramenta.setStatus(rs.getString("status"));
                 
                 ferramentas.add(ferramenta);
             }
@@ -75,7 +79,7 @@ public class FerramentaDAO {
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement("DELETE \n" +
-            "FROM tb_ferramenta\n" +
+            "FROM ferramenta\n" +
             "WHERE id = ? ;");
             stmt.setInt(1, id);
             
@@ -95,13 +99,14 @@ public class FerramentaDAO {
             PreparedStatement stmt = null;
             ResultSet rs = null;
             
-            stmt = conn.prepareStatement("UPDATE tb_ferramenta SET nome= ?, horas_uso = ?, vidautilmax = ? where id = ?");
+            stmt = conn.prepareStatement("UPDATE ferramenta SET nome= ?, horas_uso = ?, vidautilmax = ?, status = ?  where id = ?");
             
                 stmt.setString(1,ferramenta.getNome());
                 stmt.setInt(2,ferramenta.getHorasDeUso());
                 stmt.setInt(3,ferramenta.getVidaUtilMaxima());
+                stmt.setString(4,ferramenta.getStatus());
                
-                stmt.setInt(4,ferramenta.getId());
+                stmt.setLong(5,ferramenta.getId());
             linhas = stmt.executeUpdate();            
             
         }catch(SQLException e){

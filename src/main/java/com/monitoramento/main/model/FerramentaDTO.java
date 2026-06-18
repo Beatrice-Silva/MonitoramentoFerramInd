@@ -10,27 +10,49 @@ package com.monitoramento.main.model;
  */
 public class FerramentaDTO {
     
-    private int id;
+    private Long id;
+    private Object id_galpao;
+    private Object id_usuario_responsavel;
     private String nome;
-    private int horasDeUso;
-    private int vidaUtilMaxima;
-
+    private Integer horasDeUso;
+    private Integer vidaUtilMaxima;
+    private String status;
+    
     public FerramentaDTO() {
     }
 
-    public FerramentaDTO(int id, String nome, int horasDeUso, int vidaUtilMaxima) {
+    public FerramentaDTO(Long id, Long id_galpao, Long id_usuario_responsavel, String nome, int horasDeUso, int vidaUtilMaxima, String status) {
         this.id = id;
+        this.id_galpao = id_galpao;
+        this.id_usuario_responsavel = id_usuario_responsavel;
         this.nome = nome;
         this.horasDeUso = horasDeUso;
         this.vidaUtilMaxima = vidaUtilMaxima;
+        this.status = status;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Object getId_galpao() {
+        return id_galpao;
+    }
+
+    public void setId_galpao(Long id_galpao) {
+        this.id_galpao = id_galpao;
+    }
+
+    public Object getId_usuario_responsavel() {
+        return id_usuario_responsavel;
+    }
+
+    public void setId_usuario_responsavel(Long id_usuario_responsavel) {
+        this.id_usuario_responsavel = id_usuario_responsavel;
     }
 
     public String getNome() {
@@ -44,12 +66,6 @@ public class FerramentaDTO {
     public int getHorasDeUso() {
         return horasDeUso;
     }
-    
-    public double getPercentualDesgaste( ){
-        
-        double percenDesg = (horasDeUso / vidaUtilMaxima) * 100;
-        return percenDesg;
-    }
 
     public void setHorasDeUso(int horasDeUso) {
         this.horasDeUso = horasDeUso;
@@ -61,6 +77,20 @@ public class FerramentaDTO {
 
     public void setVidaUtilMaxima(int vidaUtilMaxima) {
         this.vidaUtilMaxima = vidaUtilMaxima;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    public double getPercentualDesgaste( ){
+        
+        double percenDesg = (horasDeUso / vidaUtilMaxima) * 100;
+        return percenDesg;
     }
     
     

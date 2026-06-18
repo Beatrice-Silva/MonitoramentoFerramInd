@@ -38,7 +38,8 @@ public class FerramentaService {
         if(linhas == 0){
         throw new ResponseStatusException(HttpStatusCode.valueOf(500), "Erro ao adicionar ao Banco de dados!");    
         }
-        //repository.salvarFerram(f);
+        
+        
     }
     
     public List<FerramentaDTO> listarFerram(){

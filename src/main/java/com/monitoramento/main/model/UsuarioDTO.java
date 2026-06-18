@@ -10,7 +10,7 @@ package com.monitoramento.main.model;
  */
 public class UsuarioDTO {
     
-    private int id;
+    private Long id;
     private String login;
     private String senha;
     private String perfil;
@@ -18,18 +18,18 @@ public class UsuarioDTO {
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(int id, String login, String senha, String perfil) {
+    public UsuarioDTO(Long id, String login, String senha, String perfil) {
         this.id = id;
         this.login = login;
         this.senha = senha;
         this.perfil = perfil;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

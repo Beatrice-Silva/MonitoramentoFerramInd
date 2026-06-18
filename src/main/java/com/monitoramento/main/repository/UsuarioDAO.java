@@ -31,29 +31,33 @@ public class UsuarioDAO {
             stmt.setString(2, senha);
             
             
+            if( rs == null){
+                System.out.println(conn + "= nulo");
+            }else{
+                System.out.println("Sucesso");
+            }
+            
         }catch(SQLException e){
             e.printStackTrace();
         }
         return usuario;
     }
     
-    public UsuarioDTO autenticar(String login, String senha){
+    public void cadastrar(String login, String senha){
         UsuarioDTO usuario = new UsuarioDTO();
         try{
             Connection conn = Conexao.conectar();
             PreparedStatement stmt = null;
-            ResultSet rs = null;
-            
             stmt = conn.prepareStatement("INSERT INTO usuario(login, senha) VALUES (?,?);");
             
-            stmt.setString(1, login);
-            stmt.setString(2, senha);
+            stmt.setString(1, usuario.getLogin());
+            stmt.setString(2, usuario.getSenha());
             
             
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return usuario;
+       
     }
     
     

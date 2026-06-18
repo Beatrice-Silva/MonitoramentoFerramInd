@@ -74,6 +74,11 @@ public class FerramentaController {
         return service.atualizarFerramenta(id);
     }
     
+    @GetMapping
+        (){
+    
+}
+    
     
     
     

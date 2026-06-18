@@ -14,7 +14,7 @@ public class OrdemServicoDTO {
     
     private Long id;
     private Long id_ferramenta;
-    private Long id_usuario_tecnico;
+    private Object id_usuario_tecnico;
     private String descricao;
     private Date data_abertura;
     private Date data_fechamento;
@@ -23,7 +23,7 @@ public class OrdemServicoDTO {
     public OrdemServicoDTO() {
     }
 
-    public OrdemServicoDTO(Long id, Long id_ferramenta, Long id_usuario_tecnico, String descricao, Date data_abertura, Date data_fechamento, String status) {
+    public OrdemServicoDTO(Long id, Long id_ferramenta, Object id_usuario_tecnico, String descricao, Date data_abertura, Date data_fechamento, String status) {
         this.id = id;
         this.id_ferramenta = id_ferramenta;
         this.id_usuario_tecnico = id_usuario_tecnico;
@@ -49,11 +49,11 @@ public class OrdemServicoDTO {
         this.id_ferramenta = id_ferramenta;
     }
 
-    public Long getId_usuario_tecnico() {
+    public Object getId_usuario_tecnico() {
         return id_usuario_tecnico;
     }
 
-    public void setId_usuario_tecnico(Long id_usuario_tecnico) {
+    public void setId_usuario_tecnico(Object id_usuario_tecnico) {
         this.id_usuario_tecnico = id_usuario_tecnico;
     }
 

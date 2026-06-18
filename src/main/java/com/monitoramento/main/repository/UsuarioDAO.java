@@ -4,10 +4,17 @@
  */
 package com.monitoramento.main.repository;
 
+import org.springframework.stereotype.Repository;
+
 /**
  *
  * @author Aluno
  */
+@Repository
 public class UsuarioDAO {
+    
+    public UsuarioDAO autenticar(String login, String senha){
+        
+    }
     
 }
